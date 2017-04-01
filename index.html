@@ -98,9 +98,9 @@
                 this.interval = setInterval(updateGameArea, 10);
                 var audio;
                 if (Math.random() < 0.9) {
-                    audio = new Audio('stars.mp3');
+                    audio = new Audio('stars.wav');
                 } else {
-                    audio = new Audio('lazy.mp3');
+                    audio = new Audio('lazy.wav');
                     document.body.style.background = "url('lazy.jpg')";
                 }
                 audio.addEventListener('ended', function () {
@@ -224,7 +224,7 @@
                             break;
                         case 6:
                             $("#scare").show();
-                            var audio = new Audio("boom.mp3");
+                            var audio = new Audio("boom.wav");
                             audio.play();
                             break;
                         case 7:
@@ -255,7 +255,7 @@
         }
 
         function youLose() {
-            var audio = new Audio("boom.mp3");
+            var audio = new Audio("boom.wav");
             audio.play();
             if (horribleDeath == 0) {
                 var div = document.createElement("div");
