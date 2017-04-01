@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15a0316a-2bb7-4202-8e20-b55ff375ceb3" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/boom.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lazy.mp3" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/stars.mp3" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stars.wav" afterPath="$PROJECT_DIR$/stars.wav" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -114,12 +111,12 @@
       <updated>1490986018938</updated>
       <workItem from="1490986020532" duration="7284000" />
       <workItem from="1490993465973" duration="6983000" />
-      <workItem from="1491020485623" duration="257000" />
+      <workItem from="1491020485623" duration="434000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14524000" />
+    <option name="totallyTimeSpent" value="14701000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="1" />
