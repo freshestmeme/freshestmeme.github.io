@@ -69,7 +69,7 @@
 
     function fadeLogo() {
         startGame();
-        setTimeout(function() {
+        setTimeout(function () {
             $("#logo").fadeOut();
         }, 1000);
     }
@@ -197,7 +197,7 @@
             }
             if (everyinterval(1000)) {
                 increment++;
-                if(horribleDeath != 5) {
+                if (horribleDeath != 5) {
                     myGameArea.canvas.style.opacity = (50 + 50 / Math.sqrt(increment)) / 100;
                 }
             }
@@ -235,13 +235,13 @@
                     var grav = myGamePiece.gravity;
                     var speed = myGamePiece.gravitySpeed
                     var x = myGamePiece.x;
-                    var y = myGamePiece.y-0.5;
+                    var y = myGamePiece.y - 0.5;
                     squareSize += 0.5;
                     myGamePiece = new component(squareSize, squareSize, "white", x, y);
                     myGamePiece.gravity = grav;
                     myGamePiece.gravitySpeed = speed;
                 } else if (horribleDeath == 5) {
-                    if(myGameArea.frameNo % 5 == 0) {
+                    if (myGameArea.frameNo % 5 == 0) {
                         myGameArea.canvas.style.opacity = myGameArea.canvas.style.opacity - 0.01;
                     }
                 }
@@ -280,10 +280,7 @@
         }
 
         function everyinterval(n) {
-            if (myGameArea.frameNo % n == 0) {
-                return true;
-            }
-            return false;
+            return myGameArea.frameNo % n == 0
         }
 
         function jump(n) {
@@ -292,14 +289,23 @@
 
         $(document).on("keypress", function (e) {
             // use e.which
-            if (e.which == 32 && jumping < maxJumps) {
+            if (e.which == 32) {
+                doJump();
+            }
+        });
+
+        $(myGameArea.canvas).on("click", function (e) {
+            doJump();
+        });
+
+        function doJump() {
+            if (jumping < maxJumps) {
                 jumping++;
-                jump(8)
-                var audio = new Audio("noot"+Math.floor((Math.random()*3))+".wav");
+                jump(8);
+                var audio = new Audio("noot" + Math.floor((Math.random() * 3)) + ".wav");
                 audio.play();
             }
-
-        });
+        }
     }
 </script>
 <div id="scare"></div>
