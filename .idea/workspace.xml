@@ -2,20 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15a0316a-2bb7-4202-8e20-b55ff375ceb3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/boom.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lazy.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lazy.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/noot0.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/noot1.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/noot2.wav" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scare.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/stars.mp3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vapor.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/freshestmeme.github.io.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -37,8 +23,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+            <state relative-caret-position="211">
+              <caret line="212" column="70" lean-forward="false" selection-start-line="212" selection-start-column="70" selection-end-line="212" selection-end-column="70" />
               <folding />
             </state>
           </provider>
@@ -116,12 +102,12 @@
       <option name="presentableId" value="Default" />
       <updated>1490986018938</updated>
       <workItem from="1490986020532" duration="7284000" />
-      <workItem from="1490993465973" duration="5658000" />
+      <workItem from="1490993465973" duration="6162000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12942000" />
+    <option name="totallyTimeSpent" value="13446000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1366" height="741" extended-state="1" />
@@ -166,8 +152,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="33" lean-forward="false" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        <state relative-caret-position="211">
+          <caret line="212" column="70" lean-forward="false" selection-start-line="212" selection-start-column="70" selection-end-line="212" selection-end-column="70" />
           <folding />
         </state>
       </provider>
