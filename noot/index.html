@@ -1,0 +1,320 @@
+<!doctype html>
+<html>
+<head>
+    <title>The Freshest Meme Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-8996025369764137",
+            enable_page_level_ads: true
+        });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+        body {
+            background: url("vapor.jpg");
+            background-size: cover;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: black;
+            opacity: 1;
+            z-index: 0;
+        }
+
+        #lost {
+            position: absolute;
+            height: 50vh;
+            width: 50vw;
+            top: 25vh;
+            left: 25vw;
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-family: "Indie Flower", cursive;
+            font-size: 2em;
+            border-radius: 5px;
+            z-index: 10;
+        }
+
+        #scare {
+            display: none;
+            z-index: 2;
+            position: absolute;
+            height: 90vh;
+            width: 90vw;
+            top: 5vh;
+            left: 5vw;
+            background: url("scare.png");
+            background-size: 100% 100%;
+        }
+
+        #logo {
+            position: absolute;
+            z-index: 3;
+            height: 100vh;
+            width: 100vw;
+            top: 0;
+            left: 0;
+            background: url("logo.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 50%;
+            background-color: #1359c9;
+        }
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body onload="fadeLogo()">
+<div id="logo"></div>
+<script>
+
+    function fadeLogo() {
+        startGame();
+        setTimeout(function () {
+            $("#logo").fadeOut();
+        }, 1000);
+    }
+
+    function startGame() {
+        var myGamePiece;
+        var myObstacles = [];
+        var myScore;
+        var jumping = 0;
+        var increment = 1;
+        var maxJumps = 3;
+        var scaling = 800;
+        var horribleDeath = 0;
+        var obstacleWidth = 50;
+        var deathTimer = Math.random() * 2000;
+        var squareSize = 30;
+
+        var myGameArea = {
+            canvas: document.createElement("canvas"),
+            start: function () {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+                this.context = this.canvas.getContext("2d");
+                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                this.frameNo = 0;
+                this.interval = setInterval(updateGameArea, 10);
+                var audio;
+                if (Math.random() < 0.9) {
+                    audio = new Audio('stars.mp3');
+                } else {
+                    audio = new Audio('lazy.mp3');
+                    document.body.style.background = "url('lazy.jpg')";
+                }
+                audio.addEventListener('ended', function () {
+                    this.currentTime = 0;
+                    this.play();
+                }, false);
+                audio.play();
+            },
+            clear: function () {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        };
+
+        myGamePiece = new component(squareSize, squareSize, "white", 50, 120);
+        myGamePiece.gravity = 0.1;
+        myScore = new component("30px", "Indie Flower", "white", 40, 40, "text");
+        myGameArea.start();
+
+        function component(width, height, color, x, y, type) {
+            this.type = type;
+            this.score = 0;
+            this.width = width;
+            this.height = height;
+            this.speedX = 0;
+            this.speedY = 0;
+            this.x = x;
+            this.y = y;
+            this.gravity = 0;
+            this.gravitySpeed = 0;
+            this.update = function () {
+                ctx = myGameArea.context;
+                if (this.type == "text") {
+                    ctx.font = this.width + " " + this.height;
+                    ctx.fillStyle = color;
+                    ctx.fillText(this.text, this.x, this.y);
+                } else {
+                    ctx.fillStyle = color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                }
+            };
+            this.newPos = function () {
+                this.gravitySpeed += this.gravity;
+                this.x += this.speedX;
+                this.y += this.speedY + this.gravitySpeed;
+                this.hitBottom();
+            };
+            this.hitBottom = function () {
+                var rockbottom = myGameArea.canvas.height * 0.8 - this.height;
+                if (this.y > rockbottom) {
+                    this.y = rockbottom;
+                    this.gravitySpeed = 0;
+                    jumping = 0;
+                }
+            };
+            this.crashWith = function (otherobj) {
+                var myleft = this.x;
+                var myright = this.x + (this.width);
+                var mytop = this.y;
+                var mybottom = this.y + (this.height);
+                var otherleft = otherobj.x;
+                var otherright = otherobj.x + (otherobj.width);
+                var othertop = otherobj.y;
+                var otherbottom = otherobj.y + (otherobj.height);
+                var crash = true;
+                if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+                    crash = false;
+                }
+                return crash;
+            }
+        }
+
+        function updateGameArea() {
+            var x, height, gap, minHeight, maxHeight, minGap, maxGap, canvasHeight;
+            for (i = 0; i < myObstacles.length; i += 1) {
+                if (myGamePiece.crashWith(myObstacles[i])) {
+                    clearInterval(myGameArea.interval);
+                    youLose();
+                    return;
+                }
+            }
+            myGameArea.clear();
+            myGameArea.frameNo += 1;
+            if (myGameArea.frameNo == 1 || everyinterval(Math.ceil(scaling / increment))) {
+                x = myGameArea.canvas.width;
+                canvasHeight = myGameArea.context.canvas.height;
+                minHeight = 20;
+                maxHeight = 200;
+                height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
+                myObstacles.push(new component(obstacleWidth, height, "white", x, canvasHeight - height - canvasHeight * 0.2));
+            }
+            for (i = 0; i < myObstacles.length; i += 1) {
+                myObstacles[i].x += -increment;
+                myObstacles[i].update();
+            }
+            if (everyinterval(1000)) {
+                increment++;
+                if (horribleDeath != 5) {
+                    myGameArea.canvas.style.opacity = (50 + 50 / Math.sqrt(increment)) / 100;
+                }
+            }
+
+            // Trolling factors
+            if (myGameArea.frameNo > 4000) {
+                if (everyinterval(5)) {
+                    myGameArea.canvas.style.backgroundColor = "rgb(" + [Math.floor(Math.random() * 256), Math.floor(Math.random() * 256), Math.floor(Math.random() * 256)].join(",") + ")";
+                }
+            }
+            if (myGameArea.frameNo > 4000 + deathTimer) {
+                if (horribleDeath == 0) {
+                    horribleDeath = Math.floor(Math.random() * 7) + 1;
+                    switch (horribleDeath) {
+                        case 1:
+                            scaling = 100;
+                            break;
+                        case 2:
+                            scaling = 1000;
+                            obstacleWidth = 10000;
+                            break;
+                        case 3:
+                            increment = 100;
+                            break;
+                        case 6:
+                            $("#scare").show();
+                            var audio = new Audio("boom.mp3");
+                            audio.play();
+                            break;
+                        case 7:
+                            window.location.reload();
+                    }
+                }
+                if (horribleDeath == 4) {
+                    var grav = myGamePiece.gravity;
+                    var speed = myGamePiece.gravitySpeed
+                    var x = myGamePiece.x;
+                    var y = myGamePiece.y - 0.5;
+                    squareSize += 0.5;
+                    myGamePiece = new component(squareSize, squareSize, "white", x, y);
+                    myGamePiece.gravity = grav;
+                    myGamePiece.gravitySpeed = speed;
+                } else if (horribleDeath == 5) {
+                    if (myGameArea.frameNo % 5 == 0) {
+                        myGameArea.canvas.style.opacity = myGameArea.canvas.style.opacity - 0.01;
+                    }
+                }
+            }
+
+
+            myScore.text = "SCORE: " + myGameArea.frameNo;
+            myScore.update();
+            myGamePiece.newPos();
+            myGamePiece.update();
+        }
+
+        function youLose() {
+            var audio = new Audio("boom.mp3");
+            audio.play();
+            if (horribleDeath == 0) {
+                var div = document.createElement("div");
+                div.setAttribute("id", "lost");
+                div.innerHTML = "<h1>Game Over.</h1><p>SCORE: " + myGameArea.frameNo + "</p><input type='button' onClick='window.location.reload()' value='Play Again'></input>";
+                document.body.insertBefore(div, document.body.childNodes[0]);
+            } else {
+                var messages = [
+                    "did u win",
+                    "this IS the only level.",
+                    "dam",
+                    "nice try",
+                    "oops",
+                    "it's not a bug"
+                ];
+                var message = messages[Math.floor(Math.random() * messages.length)];
+                var div = document.createElement("div");
+                div.setAttribute("id", "lost");
+                div.innerHTML = "<h1>" + message + "</h1><p>Happy April Fools! :P</p><p>SCORE: " + myGameArea.frameNo + "</p><input type='button' onClick='window.location.reload()' value='Play Again'></input>";
+                document.body.insertBefore(div, document.body.childNodes[0]);
+            }
+        }
+
+        function everyinterval(n) {
+            return myGameArea.frameNo % n == 0
+        }
+
+        function jump(n) {
+            myGamePiece.gravitySpeed = -n;
+        }
+
+        $(document).on("keypress", function (e) {
+            // use e.which
+            if (e.which == 32) {
+                doJump();
+            }
+        });
+
+        $(myGameArea.canvas).on("click", function (e) {
+            doJump();
+        });
+
+        function doJump() {
+            if (jumping < maxJumps) {
+                jumping++;
+                jump(8);
+                var audio = new Audio("noot" + Math.floor((Math.random() * 3)) + ".mp3");
+                audio.play();
+            }
+        }
+    }
+</script>
+<div id="scare"></div>
+</body>
+</html>
