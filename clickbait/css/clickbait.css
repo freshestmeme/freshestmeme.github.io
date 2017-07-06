@@ -24,7 +24,7 @@ button {
     width: 100vw;
     top: 0;
     left: 0;
-    background: url("/media/logo.png");
+    background: url("/clickbait/media/logo.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50%;
@@ -120,19 +120,19 @@ button {
 }
 
 .clicker-ez {
-    background-image: url("/media/clickers/ez.png");
+    background-image: url("/clickbait/media/clickers/ez.png");
 }
 
 .clicker-double {
-    background-image: url("/media/clickers/double.png");
+    background-image: url("/clickbait/media/clickers/double.png");
 }
 
 .clicker-frenzy {
-    background-image: url("/media/clickers/frenzy.png");
+    background-image: url("/clickbait/media/clickers/frenzy.png");
 }
 
 .clicker-super {
-    background-image: url("/media/clickers/super.png");
+    background-image: url("/clickbait/media/clickers/super.png");
 }
 
 #title-disclaimer-box, #title-attribution-box {
@@ -264,4 +264,22 @@ button {
 .fulfilled .achievement-image {
     opacity: 1;
     border: 2px solid green;
+}
+
+#achievement-dialog {
+    display: none;
+    position: fixed;
+    top: 20vh;
+    width: 40vw;
+    margin: 0 30vw;
+    border: 1px solid black;
+    background-color: white;
+    padding: 5%;
+    font-size: 0.8em;
+}
+
+#achd-img {
+    width: 30%;
+    float: left;
+    padding-right: 2%;
 }

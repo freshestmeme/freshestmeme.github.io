@@ -8,10 +8,10 @@ var expenditures = 0;
 var cpm;
 
 $(document).ready(function () {
-    //fireIntroAnimation();
-    $("#gmlogo").hide();
-    //$("#title-button").click(startGame);
-    startGame();
+    fireIntroAnimation();
+    //$("#gmlogo").hide();
+    $("#title-button").click(startGame);
+    //startGame();
 });
 
 function fireIntroAnimation() {
@@ -136,10 +136,10 @@ var achievements = {
         test: function () {
             var adcount = 0;
             var clickercount = 0;
-            for(var id in purchasedClickers) {
+            for (var id in purchasedClickers) {
                 clickercount += purchasedClickers[id].count
             }
-            for(var id in purchasedAds) {
+            for (var id in purchasedAds) {
                 adcount += purchasedAds[id].count
             }
             return adcount > 1 || clickercount > 1;
@@ -163,7 +163,7 @@ function populateStoreTable() {
         if (clicker.visible) {
             $("#store").append("<div class='store-entry'>" +
                 "<p class='store-info'>" +
-                "<img class='store-image' src='/media/clickers/" + id + ".png'/>" +
+                "<img class='store-image' src='media/clickers/" + id + ".png'/>" +
                 "<b>" + clicker.title + "</b><br/>" +
                 clicker.description +
                 "</p>" +
@@ -186,7 +186,7 @@ function populateAdStoreTable() {
         if (ad.visible) {
             $("#adstore").append("<div class='store-entry'>" +
                 "<p class='store-info'>" +
-                "<img class='store-image' src='/media/ads/" + id + ".png'/>" +
+                "<img class='store-image' src='media/ads/" + id + ".png'/>" +
                 "<b>" + ad.title + "</b><br/>" +
                 ad.description +
                 "</p>" +
@@ -209,11 +209,11 @@ function populateAchievements() {
         if (ach.fulfilled) {
             $("#achievements").append("<div class='achievement fulfilled'>" +
                 "<div class='achievement-info'><p><b>" + ach.title + "</b></p><p>" + ach.description + "</p></div>" +
-                "<img class='achievement-image' src='/media/achievements/" + id + ".png' alt='" + ach.title + "'/>");
+                "<img class='achievement-image' src='media/achievements/" + id + ".png' alt='" + ach.title + "'/>");
         } else {
             $("#achievements").append("<div class='achievement'>" +
                 "<div class='achievement-info'><p><b>" + ach.title + "</b></p><p>?????</p></div>" +
-                "<img class='achievement-image' src='/media/achievements/" + id + ".png' alt='" + ach.title + "'/>");
+                "<img class='achievement-image' src='media/achievements/" + id + ".png' alt='" + ach.title + "'/>");
         }
     }
 
@@ -295,7 +295,7 @@ function addAd(id) {
 }
 
 function drawAd(id, adSerial) {
-    var ad = '<div id="ad-' + id + '-' + adSerial + '" class="ad ad-' + id + '"><img src="/media/ads/' + id + '.png"/></div>'
+    var ad = '<div id="ad-' + id + '-' + adSerial + '" class="ad ad-' + id + '"><img src="media/ads/' + id + '.png"/></div>'
     $("#adarea").append(ad);
 
     $(".ad").off("hover");
@@ -383,15 +383,27 @@ function checkAchivements() {
         var ach = achievements[id];
         if (!ach.fulfilled && ach.test()) {
             ach.fulfilled = true;
-            alert("Achievement unlocked! " + ach.title)
             baseBalance += ach.reward;
+            alertAchievement(id, ach);
             achievementsChanged = true;
         }
     }
 
     if (achievementsChanged) {
         populateAchievements();
+        showAchievements();
+        setTimeout(hideAchievements, 2000);
     }
+}
+
+function alertAchievement(id, achievement) {
+    $("#achd-img").attr("src", "media/achievements/" + id + ".png");
+    $("#achd-title").html("<b>" + achievement.title + "</b>");
+    $("#achd-desc").html(achievement.description);
+    $("#achievement-dialog").show()
+    setTimeout(function () {
+        $("#achievement-dialog").fadeOut(1000);
+    }, 1000);
 }
 
 function handleAdClick() {
