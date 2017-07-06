@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.ico?v=1.1">
+    <title>ClickBait | It's not an Ad, it's a Feature</title>
+    <script src="external/jquery/js/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="external/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/clickbait.css"/>
+    <script src="external/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/clickbait.js"></script>
+</head>
+<body>
+
+<div id="gmlogo"></div>
+
+<div id="title-box">
+    <div id="title-image-box"><img id="title-image" src="/media/title.png"></div>
+    <div id="title-message-box">
+        <p id="title-message-1">In this game, everything makes cents.</p>
+        <p id="title-message-2">You might find something you like.</p>
+        <p id="title-message-3">It's not an Ad, it's a Feature.</p>
+    </div>
+    <div id="title-button-box">
+        <button id="title-button" type="button" class="btn btn-primary">What happens next may surprise you...</button>
+    </div>
+    <div id="title-disclaimer-box"><p>Copyright &copy; 2017 <a href="https://george.moe">George Moe</a></p>
+        <p><a href="/disclaimer">Gooogle AdSense Compliance</a></p></div>
+    <div id="title-attribution-box"><p>Music: Pixelland Kevin MacLeod (incompetech.com) <br/>
+        Licensed under Creative Commons: By Attribution 3.0 License <br/>
+        <a href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a></p></div>
+</div>
+
+<div id="gamearea" class="container">
+    <div class="row">
+        <div id="adcolumn" class="area-column col-md-6">
+            <div class="row">
+                <div title="Clicks Per Minute" id="gamestats-cpm" class="col-md-6 header-label">CPM: 0</div>
+                <div id="gamestats-score" class="col-md-6 header-label">Balance: $0.00</div>
+            </div>
+            <div id="adarea" class="row col-scrollable">
+            </div>
+        </div>
+        <div id="storecolumn" class="area-column col-md-3">
+            <div class="row">
+                <div class="col-md-12 header-label">ClickFarm</div>
+            </div>
+            <div id="store" class="row col-scrollable"></div>
+        </div>
+        <div id="adstorecolumn" class="area-column col-md-3">
+            <div class="row">
+                <div class="col-md-12 header-label">Ad Market</div>
+            </div>
+            <div id="adstore" class="row col-scrollable"></div>
+        </div>
+    </div>
+    <div id="achievements" class="row"></div>
+</div>
+
+<audio id="background-music" autoplay loop>
+    <source src="/external/macleod/Pixelland.mp3" type="audio/mpeg">
+    Audio not supported.
+</audio>
+</body>
+</html>
