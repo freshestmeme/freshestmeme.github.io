@@ -1,0 +1,183 @@
+<html>
+<head>
+    <title>ARREEE YOOUU REEAADDYY???</title>
+    <style>
+        .center {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 1% 0;
+        }
+
+        audio {
+            display: none;
+        }
+
+        #warning {
+            line-height: 3em;
+            width: 30%;
+            margin: 0 auto;
+            background-color: rgb(255, 230, 230);
+            text-align: center;
+            display: none;
+        }
+
+        img {
+            max-width: 30%;
+        }
+    </style>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+</head>
+<body id="body">
+<script>
+
+    var video = "https://www.youtube.com/embed/G9Rew7ZsJQ4";
+    var gifs = "jcena";
+
+    var body = document.getElementById("body");
+
+    var red = 0, green = 0, blue = 0;
+    var pause = 200;
+
+    var origheight = $(document).height();
+    var origwidth = $(document).width();
+
+    body.style.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+
+    function spazzyColor() {
+        blue = (blue + 101) % 256;
+        green = (green + 29) % 256;
+        red = (red + 19) % 256;
+
+        body.style.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+
+        if (TURNEDUP) setTimeout(spazzyColor, pause);
+        else setTimeout(updateColor, 10);
+        if (TURNEDUPHARDERER) setTimeout(updatePos, 10);
+    }
+
+    function updateColor() {
+        blue = (blue - 5) % 256;
+        green = (green + 2) % 256;
+        red = (red + 3) % 256;
+
+        body.style.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+
+        if (!(TURNEDUP || TURNEDUPHARD || TURNEDUPHARDERER)) setTimeout(updateColor, 10);
+        else setTimeout(spazzyColor, pause);
+    }
+
+    function updatePos() {
+        $("#videodiv").children().each(function () {
+            $(this).offset({
+                top: ($(this).offset().left + 23 - 50) % (origheight + 50),
+                left: ($(this).offset().top + 103 - 50) % (origwidth + 50)
+            });
+        });
+
+    }
+
+    function fadeIn() {
+        blue = blue + 10;
+        red = red + 10;
+        green = green + 10;
+
+        body.style.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+
+        if (blue < 256) {
+            setTimeout(fadeIn, 50);
+        }
+        else {
+            $("#start").show();
+            $("#warning").show();
+            updateColor()
+        }
+    }
+
+    setTimeout(fadeIn, 10000)
+
+    function newGif() {
+        var div = document.getElementById("videodiv");
+        $("#videodiv").append("<iframe width=\"320\" height=\"180\" src=\"" + video + "?rel=8&autoplay=1\" frameborder=\"0\" allowfullscreen></iframe>");
+        if (TURNEDUPHARD) {
+            $("#videodiv").append("<iframe width=\"320\" height=\"180\" src=\"" + video + "?rel=8&autoplay=1\" frameborder=\"0\" allowfullscreen></iframe>");
+        }
+        if (pause > 10) {
+            pause = pause - 20;
+        }
+        else {
+            pause = 1;
+        }
+    }
+
+    var TURNEDUP = false;
+    var TURNEDUPHARD = false;
+    var TURNEDUPHARDERER = false;
+    var turnedupinterval;
+
+    function reset() {
+        $("#videodiv").html("");
+    }
+
+
+    $(document).ready(function () {
+        $("#stop").hide();
+        $("#start").hide();
+        $("#harder").hide();
+        $("#harderer").hide();
+        $("#start").click(function () {
+            if (!TURNEDUP) {
+                newGif();
+                turnedupinterval = setInterval(newGif, 8000);
+                TURNEDUP = true;
+                $("#harder").show();
+                $("#stop").show();
+                $(this).hide();
+            }
+        });
+        $("#harder").click(function () {
+            TURNEDUPHARD = true;
+            $(this).hide();
+            $("#harderer").show();
+        });
+        $("#harderer").click(function () {
+            TURNEDUPHARDERER = true;
+            $(this).hide();
+            $("#videodiv").css("position", "absolute");
+        });
+        $("#stop").click(function () {
+            if (TURNEDUP) {
+                reset();
+                clearTimeout(turnedupinterval);
+                TURNEDUP = false;
+                TURNEDUPHARD = false;
+                $("#start").show();
+                $("#harder").hide();
+                $(this).hide();
+                pause = 100;
+                $("#videodiv").css("position", "relative");
+            }
+        });
+
+
+    });
+</script>
+<h1 class="center">ARREEE YOOUU REEAADDYY???</h1>
+<div class="center">
+    <button id="start" type="button">TURN UP NOW</button>
+    <button id="harder" type="button">TURN UP HARDER</button>
+    <button id="harderer" type="button">TURN UP EVEN HARDER!!!!!!</button>
+    <div id="warning"><p>Caution: Don't press if you have a history of epilepsey</p></div>
+</div>
+<div class="center">
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/G9Rew7ZsJQ4?rel=8&autoplay=1" frameborder="0"
+            allowfullscreen></iframe>
+</div>
+<div class="center" id="videodiv"></div>
+<div class="center">
+    <button id="stop" type="button">STOP IT PLS</button>
+</div>
+</body>
+</html>
