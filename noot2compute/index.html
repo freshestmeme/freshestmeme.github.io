@@ -132,7 +132,7 @@
                 this.context = this.canvas.getContext("2d");
                 document.body.insertBefore(this.canvas, document.body.childNodes[0]);
                 this.frameNo = 0;
-                this.interval = setInterval(updateGameArea, 10);
+                this.interval = setInterval(updateGameArea, 5);
                 var audio;
                 if (Math.random() < 0.9) {
                     audio = new Audio('/noot/stars.mp3');
