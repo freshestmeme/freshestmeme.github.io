@@ -43,6 +43,32 @@
             margin-top: 5vh;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/tab2compute_loader.js"></script>
+    <script>
+        $(document).ready(function () {
+            var dotCycles = ["#FF0000", "#00FFFF"];
+            var dotState = 0;
+            var lastDate = undefined;
+
+            function cycleDot() {
+                dotState = (dotState + 1) % dotCycles.length;
+                $("#dot").css({color: dotCycles[dotState]});
+
+                if (lastDate == undefined) {
+                    lastDate = new Date();
+                } else {
+                    var newDate = new Date();
+                    $("#stats").text("lag: " + (newDate - lastDate - 1000) + " | difficulty: " + t2c.difficulty().toFixed(6) + " | jobs_done: " + t2c.jobsDone());
+                    lastDate = newDate;
+                }
+                setTimeout(cycleDot, 1000);
+            }
+
+            cycleDot();
+        });
+    </script>
+
 </head>
 <body>
 <h1>Welcome to the Freshest Meme!</h1>
@@ -54,6 +80,7 @@
     <p>This game was made for a very special occasion near the beginning of April and is one of this site's first games.
         Featuring the very latest in meme culture: Pingu the Nooter, V A P O R W A V E, and various easter eggs.</p>
     <p><a href="/noot">Play The Noot Game >></a></p>
+    <p><a href="/noot2compute">Play Noot2Compute (more laggy and fun!!) >></a></p>
 </div>
 
 <div class="section">
@@ -84,6 +111,12 @@
         computational and graphical capabilities, as measured in Bootstraps.</p>
     <p><a href="/tilt">Try the Tilting Benchmark >></a></p>
 </div>
+
+<p align="center">
+    This site uses Tab2Compute to generate revenue. Status:
+    <span id="dot">&#9673;</span>
+    &nbsp;<span id="stats"></span>
+</p>
 
 <footer>Copyright &copy; 2017 George Moe</footer>
 
