@@ -125,6 +125,20 @@
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55205533-12"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-55205533-12');
+    </script>
+
     <script>
 
         var inhibitFireworks = false;
@@ -397,16 +411,16 @@
             function startMusic() {
                 $("#music").attr("src", "");
                 $("#music").attr("src",
-                        "https://www.youtube.com/embed?" +
-                        "listType=playlist&" +
-                        "list=PLj2Y0LOD_EDjojdVe8SWNWAM6cCA74V8K&" +
-                        "version=3&" +
-                        "loop=1&" +
-                        "autoplay=1&" +
-                        "rel=0&" +
-                        "showinfo=0&" +
-                        "controls=0&" +
-                        "autohide=1");
+                    "https://www.youtube.com/embed?" +
+                    "listType=playlist&" +
+                    "list=PLj2Y0LOD_EDjojdVe8SWNWAM6cCA74V8K&" +
+                    "version=3&" +
+                    "loop=1&" +
+                    "autoplay=1&" +
+                    "rel=0&" +
+                    "showinfo=0&" +
+                    "controls=0&" +
+                    "autohide=1");
             }
 
 
@@ -457,6 +471,7 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         var player;
+
         function onYouTubeIframeAPIReady() {
             player = new YT.Player("flag", {
                 events: {

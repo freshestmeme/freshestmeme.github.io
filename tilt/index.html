@@ -1,154 +1,157 @@
 <html>
-	<head>
-		<title>Tilting Benchmark</title>
-		<style>
-			@import url(https://fonts.googleapis.com/css?family=Fontdiner+Swanky);
-			@import url(https://fonts.googleapis.com/css?family=Comfortaa);
+<head>
+    <title>Tilting Benchmark</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Fontdiner+Swanky);
+        @import url(https://fonts.googleapis.com/css?family=Comfortaa);
 
-			body, html
-			{
-				margin: 0;
-				padding: 0;
-				overflow: hidden;
-			}
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
-			#triggerbox
-			{
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background-color: black;
-			}
-			
-			#infobox
-			{
-				position: absolute;
-				top: 0;
-				right: 0;
-				padding: 2%;
-				text-align: right;
-				color: white;
-			}
+        #triggerbox {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
 
-			h1
-			{
-				font-family: 'Fontdiner Swanky', cursive;
-			}
-	
-			h2
-			{
-				font-family: 'Comfortaa', cursive;
-			}
-				
+        #infobox {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 2%;
+            text-align: right;
+            color: white;
+        }
 
-			.triggerrect
-			{
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
+        h1 {
+            font-family: 'Fontdiner Swanky', cursive;
+        }
 
-			
-				
-		</style>
-		<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
-	</head>
-	<body>
-		<script>
-			var prevx = 0, prevy = 0, bail=100;
+        h2 {
+            font-family: 'Comfortaa', cursive;
+        }
 
-			var mscounter = 0, seccounter = 0;
-		
-			var score = 0, timings = [];
-
-			var lastdate = new Date();
-
-			setInterval(updateTrigger, 1);
-
-			console.log("Welcome TILTING BENCHMARK 2017 by George Moe.");
+        .triggerrect {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
 
 
-			var _0x1a34 = ["\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x23\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x23\x23\x20\x20\x23\x23\x23\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23", "\x6C\x6F\x67"];
-			console[_0x1a34[1]](_0x1a34[0])
+    </style>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"
+            integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55205533-12"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-			function updateTrigger()
-			{
-				var color = "rgb("+Math.floor(Math.random()*200+100)+","+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+")";
-				prevx = Math.floor(Math.random()*window.innerWidth);
-				prevy = Math.floor(Math.random()*window.innerHeight);
-				var side = Math.floor(Math.random()*200);
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-				$("#triggerbox").append("<div class=\"triggerrect\" style=\"width: "+side+"px; height: "+side+"; top: "+prevy+"; left: "+prevx+"; background-color: "+color+"\"></div>");
+        gtag('js', new Date());
 
-				$("#triggerbox").children().each(function(){
-					$(this).offset({left: ($(this).offset().left+(Math.random()*100-25))%(window.innerWidth+20)-20, top: ($(this).offset().top+(Math.random()*100-25))%(window.innerHeight+20)-20});
-				});
+        gtag('config', 'UA-55205533-12');
+    </script>
 
-				$("#triggerbox").css({backgroundColor: color});
+</head>
+<body>
+<script>
+    var prevx = 0, prevy = 0, bail = 100;
 
-				if(mscounter%100 == 0)
-				{
-					var now = new Date();		
-					var lastime = ((now.getTime()-lastdate.getTime())/1000);
-					score += Math.ceil(seccounter/lastime*1000);			
+    var mscounter = 0, seccounter = 0;
 
-					seccounter++;
-					mscounter = 0;
-					$("#counter").text("Level "+seccounter);
-					$("#rate").text("Last level lasted "+lastime+" seconds.");
-					$("#score").text("SCORE: "+score+" Bootstraps");
-					$("#triggerbox").append("<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/MhK-fuLbPTA?autoplay=1\" frameborder=\"0\" allowfullscreen></iframe>");
-					lastdate=now;
+    var score = 0, timings = [];
 
-					flashBox("yellow", "black", 10);
-					updateHistory(lastime);
-				}
-				
-				mscounter++;
+    var lastdate = new Date();
 
-			}
+    setInterval(updateTrigger, 1);
 
-			function flashBox(color1, color2, count)
-			{
-				$("#infobox").css({backgroundColor: color2, color: color1});
-				if(count > 0)
-				{
-					setTimeout(flashBox, 1, color2, color1, count-1);
-				}
-				else
-				{
-					$("#infobox").css({background: "none", color: "white"});
-				}
-			}
+    console.log("Welcome TILTING BENCHMARK 2017 by George Moe.");
 
-			function updateHistory(lastime)
-			{
-				timings.push(lastime);
-				var canvas = document.getElementById("history");
-				var width = canvas.width;
-				var height = canvas.height;
-				var barwidth = width/timings.length;
-				var maxtime = Math.max(...timings);
 
-				var ctx = canvas.getContext("2d");
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var _0x1a34 = ["\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x23\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x23\x23\x20\x20\x23\x23\x23\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23\x23\x23\x23\x0A\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x23", "\x6C\x6F\x67"];
+    console[_0x1a34[1]](_0x1a34[0])
 
-				for(i=0; i<timings.length; i++)
-				{
-					ctx.fillStyle = "rgb("+Math.floor(Math.random()*200+100)+","+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+")";
-					ctx.fillRect(i*barwidth,0,barwidth,timings[i]/maxtime*height);
-				}
-			}
-		</script>
-		<div id="triggerbox"></div>
-		<div id="infobox">
-			<h1 id="counter">Level 0</h1>
-			<h2 id="rate">Last level lasted 0 seconds.</h2>
-			<h2 id="score">SCORE: 0 Bootstraps</h2>
-			<p>History:</p>
-			<canvas id="history" width="500px" height="200px"></canvas>
-		</div>
-	<body>
+    function updateTrigger() {
+        var color = "rgb(" + Math.floor(Math.random() * 200 + 100) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
+        prevx = Math.floor(Math.random() * window.innerWidth);
+        prevy = Math.floor(Math.random() * window.innerHeight);
+        var side = Math.floor(Math.random() * 200);
+
+        $("#triggerbox").append("<div class=\"triggerrect\" style=\"width: " + side + "px; height: " + side + "; top: " + prevy + "; left: " + prevx + "; background-color: " + color + "\"></div>");
+
+        $("#triggerbox").children().each(function () {
+            $(this).offset({
+                left: ($(this).offset().left + (Math.random() * 100 - 25)) % (window.innerWidth + 20) - 20,
+                top: ($(this).offset().top + (Math.random() * 100 - 25)) % (window.innerHeight + 20) - 20
+            });
+        });
+
+        $("#triggerbox").css({backgroundColor: color});
+
+        if (mscounter % 100 == 0) {
+            var now = new Date();
+            var lastime = ((now.getTime() - lastdate.getTime()) / 1000);
+            score += Math.ceil(seccounter / lastime * 1000);
+
+            seccounter++;
+            mscounter = 0;
+            $("#counter").text("Level " + seccounter);
+            $("#rate").text("Last level lasted " + lastime + " seconds.");
+            $("#score").text("SCORE: " + score + " Bootstraps");
+            $("#triggerbox").append("<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/MhK-fuLbPTA?autoplay=1\" frameborder=\"0\" allowfullscreen></iframe>");
+            lastdate = now;
+
+            flashBox("yellow", "black", 10);
+            updateHistory(lastime);
+        }
+
+        mscounter++;
+
+    }
+
+    function flashBox(color1, color2, count) {
+        $("#infobox").css({backgroundColor: color2, color: color1});
+        if (count > 0) {
+            setTimeout(flashBox, 1, color2, color1, count - 1);
+        }
+        else {
+            $("#infobox").css({background: "none", color: "white"});
+        }
+    }
+
+    function updateHistory(lastime) {
+        timings.push(lastime);
+        var canvas = document.getElementById("history");
+        var width = canvas.width;
+        var height = canvas.height;
+        var barwidth = width / timings.length;
+        var maxtime = Math.max(...timings);
+
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (i = 0; i < timings.length; i++) {
+            ctx.fillStyle = "rgb(" + Math.floor(Math.random() * 200 + 100) + "," + Math.floor(Math.random() * 256) + "," + Math.floor(Math.random() * 256) + ")";
+            ctx.fillRect(i * barwidth, 0, barwidth, timings[i] / maxtime * height);
+        }
+    }
+</script>
+<div id="triggerbox"></div>
+<div id="infobox">
+    <h1 id="counter">Level 0</h1>
+    <h2 id="rate">Last level lasted 0 seconds.</h2>
+    <h2 id="score">SCORE: 0 Bootstraps</h2>
+    <p>History:</p>
+    <canvas id="history" width="500px" height="200px"></canvas>
+</div>
+<body>
 </html>

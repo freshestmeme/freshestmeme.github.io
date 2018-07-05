@@ -1,384 +1,410 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Happy America Day!</title>
-		<link rel="icon" type="img/ico" href="favicon.ico">
-		<style>
-			body {
-				background: url("stars.png");
-				margin: 0;
-				overflow: hidden;
-			}
-			#city {
-				background: url("dc.png") left bottom;
-				background-size: contain;
-				position: absolute;
-				top: 0;
-				left: 0;
-				z-index: 10;
-			}
-			#skyworks, #spaceworks, #cityworks, #coveralls {
-				position: absolute;
-				top: 0;
-				left: 0;
-				height: 100vh;
-				width: 100vw;
-			}
-			
-			#skyworks {
-				z-index: 5;
-			}
-			
-			#spaceworks {
-				z-index: 0;
-			}
-			
-			#cityworks {
-				z-index: 20;
-			}
-			
-			#coveralls {
-				z-index: 100;
-			}
-			
-			
-			#flag {
-				opacity: 0.5;
-				position: absolute;
-				top: 0;
-				left: 0;
-				z-index: 1;
-			}
-			
-			#teamamerica, #apollo {
-				position: absolute;
-				top: 0;
-				left: 0;
-				z-index: 0;
-			}
-			
-			#apollo {
-				z-index: 30;
-				opacity: 0.8;
-			}
-			
-			#music{
-				opacity: 0;
-				z-index: -1;
-			}
-			
-			.streamer, .firework, .eagle, .ship {
-				position: absolute;
-			}
-			
-			.eagle {
-				opacity: 0.5;
-			}
-			
-			.firework {
-				top: 200vh;
-			}
+<head>
+    <title>Happy America Day!</title>
+    <link rel="icon" type="img/ico" href="favicon.ico">
+    <style>
+        body {
+            background: url("stars.png");
+            margin: 0;
+            overflow: hidden;
+        }
 
-			.flipped {
-				transform: scale(-1, 1);
-				-moz-transform: scale(-1, 1);
-				-webkit-transform: scale(-1, 1);
-				-o-transform: scale(-1, 1);
-				-khtml-transform: scale(-1, 1);
-				-ms-transform: scale(-1, 1);
-			}
-		</style>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script>
-		
-			var inhibitFireworks = false;
-			
-			$(document).ready(function(){
-				if($(window).width()/$(window).height() > 16/9) {
-					$("#flag").width($(window).width());
-					$("#flag").height($(window).width()*9/16);
-					$("#city").width($(window).width());
-					$("#city").height($(window).width()*9/16);
-				} else {
-					$("#flag").height($(window).height());
-					$("#flag").width($(window).height()*16/9);
-					$("#city").height($(window).height());
-					$("#city").width($(window).height()*16/9);
-				}
-				
-				var counter = 0;
-				var fireworkRate = 2000;
-				function shootFirework(){
-				
-					if(inhibitFireworks) {
-						setTimeout(shootFirework, fireworkRate*Math.random())
-						return;
-					}
-					
-					var id = counter++;
-					var targetLeft =  $(window).width()*Math.random();
-					var targetTop = $(window).height()/3*Math.random()+$(window).height()/4;
-					var streamTime = 800+300*Math.random()
-					var scalingFactor = 0.5+Math.random();
-					
-					$("#skyworks").append("<div id=\"streamer-"+id+"\" class=\"streamer\"><img src=\"streamer.png\"></img></div>");
-					$("#skyworks").append("<div id=\"firework-"+id+"\" class=\"firework\"><img src=\"firework"+(Math.floor(Math.random()*7)+1)+".png\"></img></div>");
-					
-					var waggleInterval = setInterval(function(){
-						if($("#streamer-"+id).hasClass("flipped")) {
-							$("#streamer-"+id).removeClass("flipped");
-						} else {
-							$("#streamer-"+id).addClass("flipped");
-						}	
-					}, 100);
-					
-					if(Math.random() < 0.4) {
-						var streamerSound = new Audio("streamer.mp3");
-						streamerSound.volume = Math.random();
-						streamerSound.play();
-					}
-					
-					$("#streamer-"+id).offset({ top: $(window).height(), left: targetLeft });
-					$("#streamer-"+id+" img").height($(window).height()/3*scalingFactor);
-					$("#firework-"+id+" img").height($(window).height()/3*scalingFactor);
-					
-					
-					$("#streamer-"+id).animate({ top: targetTop }, streamTime, "linear", function(){
-						clearInterval(waggleInterval);
-						$("#streamer-"+id).fadeOut(1000, function(){
-							$("#streamer-"+id).remove();
-						});
-						$("#firework-"+id).offset({top: targetTop-$("#firework-"+id).height()/2, 
-							left: targetLeft-$("#firework-"+id).width()/2+$("#streamer-"+id).width()/2 });
-						var explosion = new Audio("firework"+(Math.floor(Math.random()*7)+1)+".mp3");
-						explosion.volume = Math.min(1, scalingFactor);
-						explosion.play();
-						if(streamerSound) streamerSound.pause();
-						$("#firework-"+id).fadeOut(1500, function(){
-							$("#firework-"+id).remove();
-						});
-					});
-					setTimeout(shootFirework, fireworkRate*Math.random())
-				}
-				setTimeout(shootFirework, 2000);
-				
-				fireworkIncrement = -100;
-				var fireworkInterval = setInterval(function(){
-					fireworkRate = fireworkRate + fireworkIncrement;
-					if(fireworkRate < 0 || fireworkRate > 2000) {
-						fireworkIncrement = -fireworkIncrement;
-						fireworkRate = fireworkRate + fireworkIncrement
-					}
-				}, 60000);
-				
-				function sendEagle() {
-					var id = counter++;
-					var choice = Math.floor(Math.random()*5)+1;
-					
-					$("#spaceworks").append("<div id=\"eagle-"+id+"\" class=\"eagle\"><img src=\"eagle"+choice+".png\"></img></div>");
-					if(choice === 1)
-					{
-						$("#eagle-"+id).offset({ top: 100, left: $(window).width()});
-						$("#eagle-"+id).animate({ left: -1200 }, 20000, "linear", function(){
-							$("#eagle-"+id).fadeOut(2000, function(){
-								$("#eagle-"+id).remove();
-							});
-						});
-					} else if (choice === 2) {
-						$("#eagle-"+id).hide();
-						$("#eagle-"+id).offset({ top: 100, left: 0});
-						$("#eagle-"+id).fadeIn(3000, function() {
-							$("#eagle-"+id).fadeOut(3000, function(){
-								$("#eagle-"+id).remove();
-							});
-						});
-					} else if (choice === 3) {
-						$("#eagle-"+id).offset({ top: $(window).height(), left: 0});
-						$("#eagle-"+id+" img").width($(window).width()/3);
-						$("#eagle-"+id).animate({ top: -1000, left: $(window).width() }, 10000, "linear", function(){
-							$("#eagle-"+id).fadeOut(2000, function(){
-								$("#eagle-"+id).remove();
-							});
-						});
-					} else if (choice === 4) {
-						$("#eagle-"+id).offset({ top: 200, left: 0});
-						$("#eagle-"+id+" img").width(0);
-						$("#eagle-"+id+" img").animate({ width: $(window).width() }, 3000, "linear");
-						$("#eagle-"+id).delay(2000).animate({top: -1000, left: $(window).width() }, 5000, "linear", function(){
-							$("#eagle-"+id).fadeOut(2000, function(){
-								$("#eagle-"+id).remove();
-							});
-						});
-					} else if (choice === 5) {
-						$("#eagle-"+id).hide();
-						$("#eagle-"+id).offset({ top: 100, left: 100});
-						$("#eagle-"+id).fadeIn(3000, function() {
-							$("#eagle-"+id).fadeOut(3000, function(){
-								$("#eagle-"+id).remove();
-							});
-						});
-					}
-						
-					setTimeout(sendEagle, 10000+20000*Math.random());
-				}
-				setTimeout(sendEagle, 10000+20000*Math.random());
-				
-				function armadaDisplay() {
-					var id = counter++;
-					$("#cityworks").append("<div id=\"aircraftcarrier-"+id+"\" class=\"ship\"><img src=\"aircraft_carrier.png\"></img></div>");
- 					$("#cityworks").append("<div id=\"submarine-"+id+"\" class=\"ship\"><img src=\"submarine.png\"></img></div>");
- 					$("#cityworks").append("<div id=\"battleship1-"+id+"\" class=\"ship\"><img src=\"battleship.png\"></img></div>");
- 					$("#cityworks").append("<div id=\"battleship2-"+id+"\" class=\"ship\"><img src=\"battleship.png\"></img></div>");
- 					$("#cityworks").append("<div id=\"sputnik-"+id+"\" class=\"ship\"><img src=\"sputnik.png\"></img></div>");
- 					$("#cityworks").append("<div id=\"missile-"+id+"\" class=\"ship\"><img src=\"missile.png\"></img></div>");
- 					$("#cityworks").append("<div id=\"explosion-"+id+"\" class=\"ship\"><img src=\"explosion.png\"></img></div>");
-					
-					$("#aircraftcarrier-"+id).css("zIndex", 22);
-					$("#aircraftcarrier-"+id).offset({ top: $(window).height()*0.5, left: $(window).width()});
-					$("#aircraftcarrier-"+id+" img").width("100vw");
-					
-					$("#submarine-"+id).css("zIndex", 24);
-					$("#submarine-"+id).offset({ top: $(window).height(), left: $(window).width()*1.2});
-					$("#submarine-"+id+" img").width("30vw");
-					
-					$("#battleship1-"+id).css("zIndex", 21);
-					$("#battleship1-"+id).offset({ top: $(window).height()*0.6, left: $(window).width()*1.2});
-					$("#battleship1-"+id+" img").width("50vw");
-					
-					$("#battleship2-"+id).css("zIndex", 25);
-					$("#battleship2-"+id).offset({ top: $(window).height()*0.65, left: $(window).width()*1.8});
-					$("#battleship2-"+id+" img").width("50vw");
-					
-					$("#sputnik-"+id).css("zIndex", 21);
-					$("#sputnik-"+id).offset({ top: $(window).height()*0.2, left: $(window).width()*1});
-					$("#sputnik-"+id+" img").width("20vw");
-					
-					$("#missile-"+id).css("zIndex", 23);
-					$("#missile-"+id).offset({ top: $(window).height(), left: 200});
-					$("#missile-"+id+" img").height("40vh");
-					
-					$("#explosion-"+id).css("zIndex", 25);
-					$("#explosion-"+id).offset({ top: 0, left: 50});
-					$("#explosion-"+id+" img").height("60vh");
-					$("#explosion-"+id).hide();
-					
-					$("#aircraftcarrier-"+id).animate({ left: -2000 }, 120000, "linear");
-					$("#battleship1-"+id).animate({ left: -2000 }, 100000, "linear");
-					$("#battleship2-"+id).animate({ left: -2000 }, 120000, "linear");
-					$("#submarine-"+id).animate({ left: -2000 }, { duration: 120000, queue: false, easing: "linear" })
-					$("#submarine-"+id).delay(10000).animate({ top: $(window).height()*0.9 }, 5000);
-					$("#sputnik-"+id).delay(50000).animate({ left: 100 }, 5000, "linear");
-					$("#missile-"+id).delay(54000).animate({ top: $(window).height()*0.2 }, 1000, "linear", function(){
-						$("#explosion-"+id).show();
-						var explosionSound = new Audio("explosion.mp3")
-						explosionSound.play();
-						$("#missile-"+id).remove();
-						$("#sputnik-"+id).remove();
-						$("#explosion-"+id).fadeOut(10000, function(){
-							$("explosion-"+id).remove();
-						});
-					});
-					
-					setTimeout(function(){
-						var missileSound = new Audio("missile.mp3")
-						missileSound.play();
-					}, 54000);
-					
-					setTimeout(armadaDisplay, 1345000);
-				}
-				setTimeout(armadaDisplay, 307000);
-				
-				function startTeamAmerica() {
-					$("body").append("<iframe id=\"teamamerica\" type=\"text/html\" src=\"https://www.youtube.com/embed/U1mlCPMYtPk?autoplay=1&showinfo=0&controls=0&enablejsapi=1\" frameborder=\"0\" allowfullscreen></iframe>");
-					if($(window).width()/$(window).height() > 16/9) {
-						$("#teamamerica").width($(window).width());
-						$("#teamamerica").height($(window).width()*9/16);
-					} else {
-						$("#teamamerica").height($(window).height());
-						$("#teamamerica").width($(window).height()*16/9);
-					}
-					
-					var teamamerica = player = new YT.Player("teamamerica", {
-						events: {
-							"onReady": onTeamAmericaReady
-						}
-					});
-					
-					function onTeamAmericaReady() {
-						// Mute!
-						teamamerica.mute();
-					}
-					
-					setTimeout(function(){
-						$("#teamamerica").remove();
-					}, 180000);
-					
-					setTimeout(startTeamAmerica, 1345000);
-				};
-				setTimeout(startTeamAmerica, 672000);
-				
-				function startApollo() {
-					inhibitFireworks = true;
-					$("body").append("<iframe id=\"apollo\" type=\"text/html\" src=\"https://www.youtube.com/embed/XSLRMdYSA9M?start=45&autoplay=1&showinfo=0&controls=0&enablejsapi=1\" frameborder=\"0\" allowfullscreen></iframe>");
-					if($(window).width()/$(window).height() > 16/9) {
-						$("#apollo").width($(window).width());
-						$("#apollo").height($(window).width()*9/16);
-					} else {
-						$("#apollo").height($(window).height());
-						$("#apollo").width($(window).height()*16/9);
-					}
-					
-					setTimeout(function(){
-						$("#apollo").attr("src", "https://www.youtube.com/embed/XSLRMdYSA9M?start=87&autoplay=1&showinfo=0&controls=0&enablejsapi=1");
-						setTimeout(function(){
-							$("#apollo").attr("src", "https://www.youtube.com/embed/XSLRMdYSA9M?start=109&autoplay=1&showinfo=0&controls=0&enablejsapi=1");
-							setTimeout(function(){
-								$("#apollo").attr("src", "https://www.youtube.com/embed/sTBIr65cL_E?start=200&autoplay=1&showinfo=0&controls=0&enablejsapi=1");
-								setTimeout(function(){
-									$("#apollo").attr("src", "https://www.youtube.com/embed/HCt1BwWE2gA?autoplay=1&showinfo=0&controls=0&enablejsapi=1");
-								}, 10000);
-							}, 15000);
-						}, 10000);
-					}, 35000);
-					
-					setTimeout(function(){
-						$("#apollo").remove();
-						inhibitFireworks = false;
-					}, 88000);
-					
-					setTimeout(startApollo, 1345000);
-				};
-				setTimeout(startApollo, 5000);
-			});
-			
-			var tag = document.createElement('script');
-			tag.src = "https://www.youtube.com/iframe_api";
-			var firstScriptTag = document.getElementsByTagName('script')[0];
-			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-		
-			var player;
-			function onYouTubeIframeAPIReady() {
-				player = new YT.Player("flag", {
-					events: {
-						"onReady": onPlayerReady
-					}
-				});
-			}
-			
-			function onPlayerReady() {
-				// Mute!
-				player.mute();
-			}
-		</script>
-			
-	</head>
-	<body>
-		<div id="coveralls"></div>
-		<div id="cityworks"></div>
-		<div id="city"></div>
-		<div id="skyworks"></div>
-		<iframe id="flag" type="text/html" src="https://www.youtube.com/embed/01jCUM5eYOE?autoplay=1&loop=1&showinfo=0&controls=0&enablejsapi=1&playlist=01jCUM5eYOE" frameborder="0" allowfullscreen></iframe>
-		<iframe id="music" src="https://www.youtube.com/embed?
+        #city {
+            background: url("dc.png") left bottom;
+            background-size: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        #skyworks, #spaceworks, #cityworks, #coveralls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #skyworks {
+            z-index: 5;
+        }
+
+        #spaceworks {
+            z-index: 0;
+        }
+
+        #cityworks {
+            z-index: 20;
+        }
+
+        #coveralls {
+            z-index: 100;
+        }
+
+        #flag {
+            opacity: 0.5;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        #teamamerica, #apollo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        #apollo {
+            z-index: 30;
+            opacity: 0.8;
+        }
+
+        #music {
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .streamer, .firework, .eagle, .ship {
+            position: absolute;
+        }
+
+        .eagle {
+            opacity: 0.5;
+        }
+
+        .firework {
+            top: 200vh;
+        }
+
+        .flipped {
+            transform: scale(-1, 1);
+            -moz-transform: scale(-1, 1);
+            -webkit-transform: scale(-1, 1);
+            -o-transform: scale(-1, 1);
+            -khtml-transform: scale(-1, 1);
+            -ms-transform: scale(-1, 1);
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55205533-12"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-55205533-12');
+    </script>
+
+    <script>
+
+        var inhibitFireworks = false;
+
+        $(document).ready(function () {
+            if ($(window).width() / $(window).height() > 16 / 9) {
+                $("#flag").width($(window).width());
+                $("#flag").height($(window).width() * 9 / 16);
+                $("#city").width($(window).width());
+                $("#city").height($(window).width() * 9 / 16);
+            } else {
+                $("#flag").height($(window).height());
+                $("#flag").width($(window).height() * 16 / 9);
+                $("#city").height($(window).height());
+                $("#city").width($(window).height() * 16 / 9);
+            }
+
+            var counter = 0;
+            var fireworkRate = 2000;
+
+            function shootFirework() {
+
+                if (inhibitFireworks) {
+                    setTimeout(shootFirework, fireworkRate * Math.random())
+                    return;
+                }
+
+                var id = counter++;
+                var targetLeft = $(window).width() * Math.random();
+                var targetTop = $(window).height() / 3 * Math.random() + $(window).height() / 4;
+                var streamTime = 800 + 300 * Math.random()
+                var scalingFactor = 0.5 + Math.random();
+
+                $("#skyworks").append("<div id=\"streamer-" + id + "\" class=\"streamer\"><img src=\"streamer.png\"></img></div>");
+                $("#skyworks").append("<div id=\"firework-" + id + "\" class=\"firework\"><img src=\"firework" + (Math.floor(Math.random() * 7) + 1) + ".png\"></img></div>");
+
+                var waggleInterval = setInterval(function () {
+                    if ($("#streamer-" + id).hasClass("flipped")) {
+                        $("#streamer-" + id).removeClass("flipped");
+                    } else {
+                        $("#streamer-" + id).addClass("flipped");
+                    }
+                }, 100);
+
+                if (Math.random() < 0.4) {
+                    var streamerSound = new Audio("streamer.mp3");
+                    streamerSound.volume = Math.random();
+                    streamerSound.play();
+                }
+
+                $("#streamer-" + id).offset({top: $(window).height(), left: targetLeft});
+                $("#streamer-" + id + " img").height($(window).height() / 3 * scalingFactor);
+                $("#firework-" + id + " img").height($(window).height() / 3 * scalingFactor);
+
+
+                $("#streamer-" + id).animate({top: targetTop}, streamTime, "linear", function () {
+                    clearInterval(waggleInterval);
+                    $("#streamer-" + id).fadeOut(1000, function () {
+                        $("#streamer-" + id).remove();
+                    });
+                    $("#firework-" + id).offset({
+                        top: targetTop - $("#firework-" + id).height() / 2,
+                        left: targetLeft - $("#firework-" + id).width() / 2 + $("#streamer-" + id).width() / 2
+                    });
+                    var explosion = new Audio("firework" + (Math.floor(Math.random() * 7) + 1) + ".mp3");
+                    explosion.volume = Math.min(1, scalingFactor);
+                    explosion.play();
+                    if (streamerSound) streamerSound.pause();
+                    $("#firework-" + id).fadeOut(1500, function () {
+                        $("#firework-" + id).remove();
+                    });
+                });
+                setTimeout(shootFirework, fireworkRate * Math.random())
+            }
+
+            setTimeout(shootFirework, 2000);
+
+            fireworkIncrement = -100;
+            var fireworkInterval = setInterval(function () {
+                fireworkRate = fireworkRate + fireworkIncrement;
+                if (fireworkRate < 0 || fireworkRate > 2000) {
+                    fireworkIncrement = -fireworkIncrement;
+                    fireworkRate = fireworkRate + fireworkIncrement
+                }
+            }, 60000);
+
+            function sendEagle() {
+                var id = counter++;
+                var choice = Math.floor(Math.random() * 5) + 1;
+
+                $("#spaceworks").append("<div id=\"eagle-" + id + "\" class=\"eagle\"><img src=\"eagle" + choice + ".png\"></img></div>");
+                if (choice === 1) {
+                    $("#eagle-" + id).offset({top: 100, left: $(window).width()});
+                    $("#eagle-" + id).animate({left: -1200}, 20000, "linear", function () {
+                        $("#eagle-" + id).fadeOut(2000, function () {
+                            $("#eagle-" + id).remove();
+                        });
+                    });
+                } else if (choice === 2) {
+                    $("#eagle-" + id).hide();
+                    $("#eagle-" + id).offset({top: 100, left: 0});
+                    $("#eagle-" + id).fadeIn(3000, function () {
+                        $("#eagle-" + id).fadeOut(3000, function () {
+                            $("#eagle-" + id).remove();
+                        });
+                    });
+                } else if (choice === 3) {
+                    $("#eagle-" + id).offset({top: $(window).height(), left: 0});
+                    $("#eagle-" + id + " img").width($(window).width() / 3);
+                    $("#eagle-" + id).animate({top: -1000, left: $(window).width()}, 10000, "linear", function () {
+                        $("#eagle-" + id).fadeOut(2000, function () {
+                            $("#eagle-" + id).remove();
+                        });
+                    });
+                } else if (choice === 4) {
+                    $("#eagle-" + id).offset({top: 200, left: 0});
+                    $("#eagle-" + id + " img").width(0);
+                    $("#eagle-" + id + " img").animate({width: $(window).width()}, 3000, "linear");
+                    $("#eagle-" + id).delay(2000).animate({
+                        top: -1000,
+                        left: $(window).width()
+                    }, 5000, "linear", function () {
+                        $("#eagle-" + id).fadeOut(2000, function () {
+                            $("#eagle-" + id).remove();
+                        });
+                    });
+                } else if (choice === 5) {
+                    $("#eagle-" + id).hide();
+                    $("#eagle-" + id).offset({top: 100, left: 100});
+                    $("#eagle-" + id).fadeIn(3000, function () {
+                        $("#eagle-" + id).fadeOut(3000, function () {
+                            $("#eagle-" + id).remove();
+                        });
+                    });
+                }
+
+                setTimeout(sendEagle, 10000 + 20000 * Math.random());
+            }
+
+            setTimeout(sendEagle, 10000 + 20000 * Math.random());
+
+            function armadaDisplay() {
+                var id = counter++;
+                $("#cityworks").append("<div id=\"aircraftcarrier-" + id + "\" class=\"ship\"><img src=\"aircraft_carrier.png\"></img></div>");
+                $("#cityworks").append("<div id=\"submarine-" + id + "\" class=\"ship\"><img src=\"submarine.png\"></img></div>");
+                $("#cityworks").append("<div id=\"battleship1-" + id + "\" class=\"ship\"><img src=\"battleship.png\"></img></div>");
+                $("#cityworks").append("<div id=\"battleship2-" + id + "\" class=\"ship\"><img src=\"battleship.png\"></img></div>");
+                $("#cityworks").append("<div id=\"sputnik-" + id + "\" class=\"ship\"><img src=\"sputnik.png\"></img></div>");
+                $("#cityworks").append("<div id=\"missile-" + id + "\" class=\"ship\"><img src=\"missile.png\"></img></div>");
+                $("#cityworks").append("<div id=\"explosion-" + id + "\" class=\"ship\"><img src=\"explosion.png\"></img></div>");
+
+                $("#aircraftcarrier-" + id).css("zIndex", 22);
+                $("#aircraftcarrier-" + id).offset({top: $(window).height() * 0.5, left: $(window).width()});
+                $("#aircraftcarrier-" + id + " img").width("100vw");
+
+                $("#submarine-" + id).css("zIndex", 24);
+                $("#submarine-" + id).offset({top: $(window).height(), left: $(window).width() * 1.2});
+                $("#submarine-" + id + " img").width("30vw");
+
+                $("#battleship1-" + id).css("zIndex", 21);
+                $("#battleship1-" + id).offset({top: $(window).height() * 0.6, left: $(window).width() * 1.2});
+                $("#battleship1-" + id + " img").width("50vw");
+
+                $("#battleship2-" + id).css("zIndex", 25);
+                $("#battleship2-" + id).offset({top: $(window).height() * 0.65, left: $(window).width() * 1.8});
+                $("#battleship2-" + id + " img").width("50vw");
+
+                $("#sputnik-" + id).css("zIndex", 21);
+                $("#sputnik-" + id).offset({top: $(window).height() * 0.2, left: $(window).width() * 1});
+                $("#sputnik-" + id + " img").width("20vw");
+
+                $("#missile-" + id).css("zIndex", 23);
+                $("#missile-" + id).offset({top: $(window).height(), left: 200});
+                $("#missile-" + id + " img").height("40vh");
+
+                $("#explosion-" + id).css("zIndex", 25);
+                $("#explosion-" + id).offset({top: 0, left: 50});
+                $("#explosion-" + id + " img").height("60vh");
+                $("#explosion-" + id).hide();
+
+                $("#aircraftcarrier-" + id).animate({left: -2000}, 120000, "linear");
+                $("#battleship1-" + id).animate({left: -2000}, 100000, "linear");
+                $("#battleship2-" + id).animate({left: -2000}, 120000, "linear");
+                $("#submarine-" + id).animate({left: -2000}, {duration: 120000, queue: false, easing: "linear"})
+                $("#submarine-" + id).delay(10000).animate({top: $(window).height() * 0.9}, 5000);
+                $("#sputnik-" + id).delay(50000).animate({left: 100}, 5000, "linear");
+                $("#missile-" + id).delay(54000).animate({top: $(window).height() * 0.2}, 1000, "linear", function () {
+                    $("#explosion-" + id).show();
+                    var explosionSound = new Audio("explosion.mp3")
+                    explosionSound.play();
+                    $("#missile-" + id).remove();
+                    $("#sputnik-" + id).remove();
+                    $("#explosion-" + id).fadeOut(10000, function () {
+                        $("explosion-" + id).remove();
+                    });
+                });
+
+                setTimeout(function () {
+                    var missileSound = new Audio("missile.mp3")
+                    missileSound.play();
+                }, 54000);
+
+                setTimeout(armadaDisplay, 1345000);
+            }
+
+            setTimeout(armadaDisplay, 307000);
+
+            function startTeamAmerica() {
+                $("body").append("<iframe id=\"teamamerica\" type=\"text/html\" src=\"https://www.youtube.com/embed/U1mlCPMYtPk?autoplay=1&showinfo=0&controls=0&enablejsapi=1\" frameborder=\"0\" allowfullscreen></iframe>");
+                if ($(window).width() / $(window).height() > 16 / 9) {
+                    $("#teamamerica").width($(window).width());
+                    $("#teamamerica").height($(window).width() * 9 / 16);
+                } else {
+                    $("#teamamerica").height($(window).height());
+                    $("#teamamerica").width($(window).height() * 16 / 9);
+                }
+
+                var teamamerica = player = new YT.Player("teamamerica", {
+                    events: {
+                        "onReady": onTeamAmericaReady
+                    }
+                });
+
+                function onTeamAmericaReady() {
+                    // Mute!
+                    teamamerica.mute();
+                }
+
+                setTimeout(function () {
+                    $("#teamamerica").remove();
+                }, 180000);
+
+                setTimeout(startTeamAmerica, 1345000);
+            };
+            setTimeout(startTeamAmerica, 672000);
+
+            function startApollo() {
+                inhibitFireworks = true;
+                $("body").append("<iframe id=\"apollo\" type=\"text/html\" src=\"https://www.youtube.com/embed/XSLRMdYSA9M?start=45&autoplay=1&showinfo=0&controls=0&enablejsapi=1\" frameborder=\"0\" allowfullscreen></iframe>");
+                if ($(window).width() / $(window).height() > 16 / 9) {
+                    $("#apollo").width($(window).width());
+                    $("#apollo").height($(window).width() * 9 / 16);
+                } else {
+                    $("#apollo").height($(window).height());
+                    $("#apollo").width($(window).height() * 16 / 9);
+                }
+
+                setTimeout(function () {
+                    $("#apollo").attr("src", "https://www.youtube.com/embed/XSLRMdYSA9M?start=87&autoplay=1&showinfo=0&controls=0&enablejsapi=1");
+                    setTimeout(function () {
+                        $("#apollo").attr("src", "https://www.youtube.com/embed/XSLRMdYSA9M?start=109&autoplay=1&showinfo=0&controls=0&enablejsapi=1");
+                        setTimeout(function () {
+                            $("#apollo").attr("src", "https://www.youtube.com/embed/sTBIr65cL_E?start=200&autoplay=1&showinfo=0&controls=0&enablejsapi=1");
+                            setTimeout(function () {
+                                $("#apollo").attr("src", "https://www.youtube.com/embed/HCt1BwWE2gA?autoplay=1&showinfo=0&controls=0&enablejsapi=1");
+                            }, 10000);
+                        }, 15000);
+                    }, 10000);
+                }, 35000);
+
+                setTimeout(function () {
+                    $("#apollo").remove();
+                    inhibitFireworks = false;
+                }, 88000);
+
+                setTimeout(startApollo, 1345000);
+            };
+            setTimeout(startApollo, 5000);
+        });
+
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player("flag", {
+                events: {
+                    "onReady": onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady() {
+            // Mute!
+            player.mute();
+        }
+    </script>
+
+</head>
+<body>
+<div id="coveralls"></div>
+<div id="cityworks"></div>
+<div id="city"></div>
+<div id="skyworks"></div>
+<iframe id="flag" type="text/html"
+        src="https://www.youtube.com/embed/01jCUM5eYOE?autoplay=1&loop=1&showinfo=0&controls=0&enablejsapi=1&playlist=01jCUM5eYOE"
+        frameborder="0" allowfullscreen></iframe>
+<iframe id="music" src="https://www.youtube.com/embed?
 			listType=playlist&
 			list=PLj2Y0LOD_EDjr5HbkSFlp0cCouNacesDC&
 			version=3&
@@ -389,6 +415,6 @@
 			controls=0&
 			autohide=1
 			" frameborder="0" allowfullscreen></iframe>
-		<div id="spaceworks"></div>
-	</body>
+<div id="spaceworks"></div>
+</body>
 </html>
