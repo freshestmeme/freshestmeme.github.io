@@ -47,7 +47,7 @@
 <body id="body">
 <script>
 
-    var video = "https://www.youtube.com/embed/5LitDGyxFh4";
+    var video = "https://www.youtube.com/embed/GmTw6tSQAUU";
     var gifs = "jcena";
 
     var body = document.getElementById("body");
@@ -114,9 +114,9 @@
 
     function newGif() {
         var div = document.getElementById("videodiv");
-        $("#videodiv").append("<iframe width=\"320\" height=\"180\" src=\"" + video + "?rel=8&autoplay=1\" frameborder=\"0\" allowfullscreen></iframe>");
+        $("#videodiv").append("<iframe width=\"320\" height=\"180\" src=\"" + video + "?rel=0&amp;autoplay=1\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>");
         if (TURNEDUPHARD) {
-            $("#videodiv").append("<iframe width=\"320\" height=\"180\" src=\"" + video + "?rel=8&autoplay=1\" frameborder=\"0\" allowfullscreen></iframe>");
+            $("#videodiv").append("<iframe width=\"320\" height=\"180\" src=\"" + video + "?rel=0&amp;autoplay=1\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>");
         }
         if (pause > 10) {
             pause = pause - 20;
@@ -186,7 +186,7 @@
     <div id="warning"><p>Caution: Don't press if you have a history of epilepsey</p></div>
 </div>
 <div class="center">
-    <iframe width="640" height="360" src="https://www.youtube.com/embed/5LitDGyxFh4?rel=8&autoplay=1" frameborder="0"
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/GmTw6tSQAUU?rel=0&amp;autoplay=1" frameborder="0" allow="autoplay; encrypted-media"
             allowfullscreen></iframe>
 </div>
 <div class="center" id="videodiv"></div>
