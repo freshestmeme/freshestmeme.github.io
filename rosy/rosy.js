@@ -31,8 +31,6 @@ const getArticles = async () => {
         return rss.items;
     }));
 
-    console.log(items);
-
     return [].concat(...items);
 };
 
