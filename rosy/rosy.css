@@ -1,0 +1,113 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url("bg.png");
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    font-family: 'Dekko', cursive;
+    font-size: 1.5rem;
+}
+
+h1, p {
+    margin-bottom: 0;
+}
+
+h1 {
+    font-size: 5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+    background-color: white;
+}
+
+header, footer {
+    text-align: center;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    padding-bottom: 24px;
+}
+
+.content {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.section {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    border: 1px solid white;
+
+    margin: 12px;
+    padding: 12px;
+}
+
+.controls, #messages {
+    text-align: center;
+}
+
+#thresh-select, #music {
+    width: 100%;
+}
+
+.article {
+    display: flex;
+    flex-direction: row;
+}
+
+.article-title {
+    flex: 1;
+}
+
+.article-image {
+    width: 25%;
+}
+
+.article-image img {
+    width: 100%;
+}
+
+.article-score {
+    font-size: 1rem;
+}
+
+.platitude {
+    display: none;
+    position: fixed;
+
+    width: 25vw;
+    min-width: 200px;
+}
+
+.platitude img {
+    width: 100%;
+}
+
+.platitude p {
+    position: absolute;
+    top: 24px;
+    left: 48px;
+
+    font-size: 2em;
+}

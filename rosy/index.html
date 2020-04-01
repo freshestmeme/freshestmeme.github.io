@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Primary Meta Tags -->
+    <title>rosy lenses &#x1F496; &#x1F453;</title>
+    <meta name="title" content="rosy lenses &#x1F496; &#x1F453; - good news only :)">
+    <meta name="description" content="everything is going to be alright <3">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freshestme.me/rosy">
+    <meta property="og:title" content="rosy lenses &#x1F496; &#x1F453; - good news only :)">
+    <meta property="og:description" content="everything is going to be alright <3">
+    <meta property="og:image" content="preview.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://freshestme.me/rosy">
+    <meta property="twitter:title" content="rosy lenses &#x1F496; &#x1F453; - good news only :)">
+    <meta property="twitter:description" content="everything is going to be alright <3">
+    <meta property="twitter:image" content="preview.jpg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Dekko&display=swap" rel="stylesheet">
+    <link href="rosy.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+    <script src="rosy.js"></script>
+
+</head>
+<body>
+<header>
+    <h1>rosy lenses &#x1F496; &#x1F453;</h1>
+    <h2 style="margin-top: 0"><i>everything will be alright <3</i></h2>
+</header>
+<main>
+    <div id="platitudes"></div>
+    <div class="content">
+        <div class="controls section">
+            <p>&#x1F3B6; play soothing music &#x1F3B6;</p>
+            <audio id="music" controls loop autoplay>
+                <source src="sunshine.mp3" type="audio/mpeg">
+                audio not supported :(
+            </audio>
+            <p>&#x1F648; adjust niceness &#x1F648;</p>
+            <input type="range" min="0" max="1000" value="0" class="slider" id="thresh-select">
+            <span> (: niceness <input type="text" id="thresh-value"/></span>
+        </div>
+        <div id="messages" class="section">
+        </div>
+        <div id="feed">
+        </div>
+        <div class="section" style="text-align: center">
+            <p><b>About</b></p>
+            <p>why look at bad news when you can look at good news?</p>
+            <p>it's april 1st, 2020 and the future is now: this website uses cutting edge machine learning
+                technology<a href="javascript:void(0)" id="toggle-about">*</a>
+                and memetic techniques to make everything that's going on right now seem maybe just a bit nicer
+                :)</p>
+            <div id="about-text" style="display: none">
+                <p style="font-size: 0.8rem">
+                    *well april fools i guess, the sentiment analysis model doesn't work very well,
+                    letting some pretty awful news through. it's okay though, the music is nice and there are rainbows.
+                </p>
+            </div>
+            <p>so welcome and stay as long as you'd like <3</p>
+        </div>
+    </div>
+</main>
+<footer>
+    <p class="subtitle">&#x1F3DB; copyright &copy; <span id="copy-year">2020</span> <a href="https://george.moe">
+        George Moe</a> &#x1F680;</p>
+    <p>built with <a href="https://www.tensorflow.org/js">tensorflow.js</a></p>
+    <script>$("#copy-year").text((new Date()).getFullYear());</script>
+    <p class="subtitle" style="font-size: 0.8rem">
+        Sunshine Kevin MacLeod (incompetech.com)
+        Licensed under Creative Commons: By Attribution 3.0 License
+        http://creativecommons.org/licenses/by/3.0/
+    </p>
+</footer>
+</body>
+</html>
