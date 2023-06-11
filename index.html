@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>The Freshest Meme</title>
-    <link rel="icon" type="image/ico" href="america2017/favicon.ico"/>
+    <link rel="icon" type="image/png" href="favicon.png"/>
     <style>
         body {
             background: black;
@@ -44,8 +44,9 @@
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55205533-12"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-527228LH4F"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -55,87 +56,80 @@
 
         gtag('js', new Date());
 
-        gtag('config', 'UA-55205533-12');
+        gtag('config', 'G-527228LH4F');
     </script>
 
-    <script src="/tab2compute_loader.js"></script>
     <script>
-        $(document).ready(function () {
-            var dotCycles = ["#FF0000", "#00FFFF"];
-            var dotState = 0;
-            var lastDate = undefined;
-
-            function cycleDot() {
-                dotState = (dotState + 1) % dotCycles.length;
-                $("#dot").css({color: dotCycles[dotState]});
-
-                if (lastDate == undefined) {
-                    lastDate = new Date();
-                } else {
-                    var newDate = new Date();
-                    $("#stats").text("lag: " + ((newDate - lastDate - 1000) / 10).toFixed(2) + "% | difficulty: " + t2c.difficulty().toFixed(6) + " | jobs_done: " + t2c.jobsDone());
-                    lastDate = newDate;
-                }
-                setTimeout(cycleDot, 1000);
-            }
-
-            cycleDot();
-        });
+        function onLoad() {
+            const year = new Date().getFullYear()
+            document.getElementById("current-year").innerText = String(year)
+        }
     </script>
-
 </head>
-<body>
+<body onload="onLoad()">
 <h1>Welcome to the Freshest Meme!</h1>
 <p>This site is a collection of fun games and funny projects made by <a href="https://george.moe">George Moe</a>.</p>
 
 <div class="section">
-    <h2>The Noot Game</h2>
-    <img src="noot.png"/>
-    <p>This game was made for a very special occasion near the beginning of April and is one of this site's first games.
-        Featuring the very latest in meme culture: Pingu the Nooter, V A P O R W A V E, and various easter eggs.</p>
-    <p><a href="/noot">Play The Noot Game >></a></p>
-    <p><s><a href="/noot2compute">Play Noot2Compute (more laggy and fun!!) >></a></s> (server on hiatus)</p>
+    <h2>The Only April Fools Joke You Need</h2>
+    <img alt="george.moe/april-fools screenshot" src="april-fools.png"/>
+    <p>my humor has been replaced with generative ai</p>
+    <p><a href="https://george.moe/april-fools">Visit the page &gt;&gt;</a></p>
 </div>
 
 <div class="section">
-    <h2>ClickBait (beta)</h2>
-    <img src="clickbait.png"/>
-    <p>This work-in-progress pokes fun at the click-bait nature of online advertising in an entertaining and rewarding
-        game (while also making me some money :P). Try it out, share it with your friends, and enjoy seeing some of your
-        favorite advertisements.</p>
-    <p><a href="/clickbait">Play ClickBait >></a></p>
+    <h2>Fungible Tokens</h2>
+    <img alt="fungible.moe screenshot" src="fungible.png"/>
+    <p>Every one unique, none of them special!</p>
+    <p><a href="https://fungible.moe">fungible.moe &gt;&gt;</a></p>
+    <p><a href="https://pumpkins.nonfungible.moe">"pumpkins" - halloween 2022 &gt;&gt;</a></p>
 </div>
 
 <div class="section">
     <h2>rosy lenses &#x1F496; &#x1F453;</h2>
-    <img src="rosy/preview.jpg"/>
+    <img alt="rosy lenses screenshot" src="rosy/preview.jpg"/>
     <p>machine learning and memes to make the world seem just a bit nicer :)</p>
-    <p><a href="/rosy">Visit rosy lenses &#x1F496; &#x1F453; >></a></p>
+    <p><a href="/rosy">Visit rosy lenses &#x1F496; &#x1F453; &gt;&gt;</a></p>
 </div>
 
+<div class="section">
+    <h2>ClickBait (concept)</h2>
+    <img alt="Clickbait screenshot" src="clickbait.png"/>
+    <p>This sketch poked fun at the click-bait nature of online advertising in an entertaining and
+        rewarding game (while also hypothetically generating ad revenue :P). Try it out, share it with your
+        friends, and (imagine) enjoy seeing some of your favorite advertisements. (You may need to disable adblock as it
+        may think the placeholder images are actually ads.)</p>
+    <p><a href="/clickbait">Play ClickBait &gt;&gt;</a></p>
+</div>
+
+<div class="section">
+    <h2>The Noot Game</h2>
+    <img alt="Noot Game screenshot" src="noot.png"/>
+    <p>This game was made for a very special occasion near the beginning of April and is one of this site's first games.
+        Featuring the very latest in meme culture: Pingu the Nooter, V A P O R W A V E, and various easter eggs.</p>
+    <p><a href="/noot"><b>(Warning! Flashing Lights)</b> Play The Noot Game &gt;&gt;</a></p>
+</div>
 
 <div class="section">
     <h2>Happy America Day</h2>
     <img src="america.png"/>
-    <p>Celebrate the 4th of July from the comfort of your browser.</p>
-    <p><s><a href="https://america2019.freshestme.me">America Day 2019 >></a></s> (server on hiatus)</p>
-    <p><s><a href="https://america2018.freshestme.me">America Day 2018 >></a></s> (server on hiatus)</p>
-    <p><s><a href="#">America Day 2017 >></a></s> (server on hiatus)</p>
-    <p><a href="/america2016">America Day 2016 >></a></p>
+    <p>Celebrate the 4th of July from the comfort of your browser. (This was made July 4th, 2016 when videos still
+        autoplayed with sound - that part no longer works unless you allow video and audio to autoplay.)</p>
+    <p><a href="/america">America Day >></a></p>
 </div>
 
 <div class="section">
     <h2>The Tilting Benchmark</h2>
-    <img src="tilt.png"/>
+    <img alt="Tilting Benchmark screenshot" src="tilt.png"/>
     <p>This is one of the original Freshest Meme pages, an aggressively epileptic website (warning: flashing lights and
         bright colors) that becomes increasingly computationally expensive to run. The rate at which your computer
         progresses through the levels (as well as how many levels it can complete) is a good description of its
         computational and graphical capabilities, as measured in Bootstraps.</p>
-    <p><a href="/tilt">Try the Tilting Benchmark >></a></p>
-    <p><a href="/cena">(Bonus) The Benchmark's Predecessor... >></a></p>
+    <p><a href="/tilt"><b>(Warning! Flashing Lights)</b> Try the Tilting Benchmark &gt;&gt;</a></p>
+    <p><a href="/cena"><b>(Warning! Flashing Lights)</b> Bonus: The Benchmark's Predecessor... &gt;&gt;</a></p>
 </div>
 
-<footer>Copyright &copy; 2020 George Moe</footer>
+<footer>Copyright &copy; 2015-<span id="current-year">...</span> George Moe</footer>
 
 </body>
 </html>

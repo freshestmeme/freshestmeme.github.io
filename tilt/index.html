@@ -47,8 +47,9 @@
     </style>
     <script src="https://code.jquery.com/jquery-2.2.2.min.js"
             integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55205533-12"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-527228LH4F"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -58,7 +59,7 @@
 
         gtag('js', new Date());
 
-        gtag('config', 'UA-55205533-12');
+        gtag('config', 'G-527228LH4F');
     </script>
 
 </head>
@@ -122,8 +123,7 @@
         $("#infobox").css({backgroundColor: color2, color: color1});
         if (count > 0) {
             setTimeout(flashBox, 1, color2, color1, count - 1);
-        }
-        else {
+        } else {
             $("#infobox").css({background: "none", color: "white"});
         }
     }

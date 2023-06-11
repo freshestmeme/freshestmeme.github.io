@@ -30,6 +30,20 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
     <script src="rosy.js"></script>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-527228LH4F"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-527228LH4F');
+    </script>
+
 </head>
 <body>
 <header>
@@ -71,10 +85,9 @@
     </div>
 </main>
 <footer>
-    <p class="subtitle">&#x1F3DB; copyright &copy; <span id="copy-year">2020</span> <a href="https://george.moe">
+    <p class="subtitle">&#x1F3DB; copyright &copy; 2020 <a href="https://george.moe">
         George Moe</a> &#x1F680;</p>
     <p>built with <a href="https://www.tensorflow.org/js">tensorflow.js</a></p>
-    <script>$("#copy-year").text((new Date()).getFullYear());</script>
     <p class="subtitle" style="font-size: 0.8rem">
         Sunshine Kevin MacLeod (incompetech.com)
         Licensed under Creative Commons: By Attribution 3.0 License
